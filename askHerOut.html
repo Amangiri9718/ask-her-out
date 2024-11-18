@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Her Out</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .question {
+            font-size: 26px;
+            margin-bottom: 30px;
+            animation: fadeIn 2s;
+            color: #fffce8;
+            text-shadow: 2px 2px 4px #d35f5f;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 20px;
+            padding: 15px 25px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.5s ease;
+        }
+        button.yes {
+            background-color: #4caf50;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button.no {
+            background-color: #ff5722;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        #response {
+            margin-top: 30px;
+            font-size: 22px;
+            animation: fadeIn 1s;
+            color: #ffffe6;
+            text-shadow: 1px 1px 3px #5e320b;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Would you like to go out with me? 💕</div>
+        <div class="buttons">
+            <button class="yes" onclick="showResponse('yes')" style="position: static;">Yes</button>
+            <button class="no" onclick="moveButton(this)">No</button>
+        </div>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        let noButtonClickCount = 0;
+
+        function showResponse(answer) {
+            const responseDiv = document.getElementById("response");
+            responseDiv.style.display = "block";
+
+            if (answer === "yes") {
+                responseDiv.innerHTML = "🎉 Awesome! Let's plan something fun! 💃🕺";
+            }
+        }
+
+        function moveButton(button) {
+            noButtonClickCount++;
+            if (noButtonClickCount >= 2) {
+                // Move button to a random position on screen
+                button.style.transform = `translate(${randomPosition()}vw, ${randomPosition()}vh)`;
+            } else {
+                // After first click, button moves slightly away
+                button.style.transform = "translate(-50px, 50px)";
+            }
+
+            // Add a playful message
+            const responseDiv = document.getElementById("response");
+            if (noButtonClickCount >= 2) {
+                responseDiv.style.display = "block";
+                responseDiv.innerHTML = "😅 Can't catch me! Are you sure you want to say no?";
+            }
+        }
+
+        function randomPosition() {
+            // Random value for button movement within screen dimensions
+            return Math.random() * 60 - 30; // Generates a random value between -30vw and 30vw or -30vh and 30vh
+        }
+    </script>
+</body>
+</html>
